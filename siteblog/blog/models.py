@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Category(models.Model):
@@ -12,6 +13,9 @@ class Category(models.Model):
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
         ordering = ['title']
+
+    def get_absolute_url(self):
+        return reverse('category', kwargs={'slug': self.slug})
 
 
 
@@ -47,3 +51,5 @@ class Post(models.Model):
         verbose_name_plural = 'Посты'
         ordering = ['-created_at']
 
+    def get_absolute_url(self):
+        return reverse('post', kwargs={'slug': self.slug})
